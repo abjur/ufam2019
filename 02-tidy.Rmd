@@ -1,0 +1,168 @@
+# Ferramentas tidy
+
+```{r echo=TRUE}
+library(tidyverse)
+```
+
+```{r echo=TRUE}
+# Base de dados -----------------------------------------------------------
+cjsg <- readr::read_rds("data-raw/camaras/d_cjsg.rds")
+```
+
+```{r echo=TRUE}
+glimpse(cjsg)
+```
+
+## select
+
+```{r echo=TRUE}
+select(cjsg, id_processo, comarca, dt_decisao)
+```
+
+```{r echo=TRUE}
+select(cjsg, starts_with("dt_"))
+```
+
+```{r echo=TRUE}
+select(cjsg, -starts_with("id"), -ementa)
+```
+
+## arrange
+
+```{r echo=TRUE}
+arrange(cjsg, pagina)
+```
+
+```{r echo=TRUE}
+arrange(cjsg, as.numeric(pagina))
+```
+
+```{r echo=TRUE}
+arrange(cjsg, desc(as.numeric(pagina)))
+```
+
+```{r echo=TRUE}
+df <- tibble(x = c(NA, 2, 1), y = c(1, 2, 3))
+arrange(df, x)
+```
+
+## Pipe (%>%)
+
+```{r, eval=FALSE}
+esfrie(
+  asse(
+    coloque(
+      bata(
+        acrescente(
+          recipiente(
+            rep(
+              "farinha", 
+              2
+            ), 
+            "água", "fermento", "leite", "óleo"
+          ), 
+          "farinha", até = "macio"
+        ), 
+        duração = "3min"
+      ), 
+      lugar = "forma", tipo = "grande", untada = TRUE
+    ), 
+    duração = "50min"
+  ), 
+  "geladeira", "20min"
+)
+
+# Veja como o código acima pode ser reescrito utilizando-se o pipe. 
+# Agora realmente se parece com uma receita de bolo.
+
+recipiente(rep("farinha", 2), "água", "fermento", "leite", "óleo") %>%
+  acrescente("farinha", até = "macio") %>%
+  bata(duração = "3min") %>%
+  coloque(lugar = "forma", tipo = "grande", untada = TRUE) %>%
+  asse(duração = "50min") %>%
+  esfrie("geladeira", "20min")
+
+# ATALHO: CTRL + SHIFT + M
+```
+
+## filter
+
+```{r echo=TRUE}
+cjsg %>% 
+  filter(as.numeric(pagina) > 10000)
+```
+
+
+```{r echo=TRUE}
+cjsg %>% 
+  filter(comarca == "São Paulo")
+```
+
+
+```{r echo=TRUE}
+cjsg %>% 
+  filter(comarca %in% c("São Paulo", "Campinas"), 
+         as.numeric(pagina) > 10000)
+```
+
+### str_detect
+
+```{r echo=TRUE}
+cjsg %>% 
+  filter(str_detect(classe_assunto, "Roubo"))
+```
+
+```{r}
+cjsg %>% 
+  filter(str_detect(classe_assunto, "Homic"))
+```
+
+## mutate
+
+```{r echo=TRUE}
+# exemplo 1
+library(lubridate)
+
+cjsg %>% 
+  mutate(dt_decisao = dmy(dt_decisao)) %>% 
+  filter(day(dt_decisao) == 01)
+```
+
+## group_by e summarise
+
+```{r echo=TRUE}
+cjsg %>% 
+  select(id_processo, dt_decisao) %>% 
+  mutate(dia_da_semana = weekdays(dmy(dt_decisao))) %>% 
+  group_by(dia_da_semana) %>% 
+  summarise(n = n())
+```
+
+## left_join
+
+```{r echo=TRUE}
+cposg <- read_rds("data-raw/camaras/d_cposg.rds")
+
+
+d_total <- cjsg %>% 
+  left_join(cposg, c("id_processo" = "id_lawsuit"))
+```
+
+### Aplicação prática
+
+```{r echo=TRUE}
+# lidando com repeticoes
+cjsg_distintos <- cjsg %>% 
+  mutate(dt_decisao = dmy(dt_decisao)) %>% 
+  arrange(desc(dt_decisao)) %>% 
+  distinct(id_processo, .keep_all = TRUE) 
+
+cposg_distintos <- cposg %>% 
+  filter(!str_detect(file, "recurso|reex")) %>% 
+  distinct(id_lawsuit, .keep_all = TRUE)
+
+cjsg_distintos %>% 
+  left_join(cposg_distintos, c("id_processo" = "id_lawsuit"))
+
+```
+

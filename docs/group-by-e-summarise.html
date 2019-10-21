@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>3.6 group_by e summarise | Jurimetria com aplicações em R</title>
+  <meta name="description" content="3.6 group_by e summarise | Jurimetria com aplicações em R" />
+  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="3.6 group_by e summarise | Jurimetria com aplicações em R" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="3.6 group_by e summarise | Jurimetria com aplicações em R" />
+  
+  
+  
+
+<meta name="author" content="Associação Brasileira de Jurimetria" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="mutate.html"/>
+<link rel="next" href="left-join.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href='http://abj.org.br'><img src='https://raw.githubusercontent.com/abjur/tjspBook/master/abj_logo_cut.png' style="max-width:100%;"/></a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Apresentação</a><ul>
+<li class="chapter" data-level="1.1" data-path="materiais-do-minicurso.html"><a href="materiais-do-minicurso.html"><i class="fa fa-check"></i><b>1.1</b> Materiais do minicurso</a></li>
+<li class="chapter" data-level="1.2" data-path="materiais-e-tarefas-adicionais.html"><a href="materiais-e-tarefas-adicionais.html"><i class="fa fa-check"></i><b>1.2</b> Materiais e tarefas adicionais</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="o-que-é-jurimetria.html"><a href="o-que-é-jurimetria.html"><i class="fa fa-check"></i><b>2</b> O que é Jurimetria?</a><ul>
+<li class="chapter" data-level="2.1" data-path="jurimetria-em-empresas.html"><a href="jurimetria-em-empresas.html"><i class="fa fa-check"></i><b>2.1</b> Jurimetria em empresas</a></li>
+<li class="chapter" data-level="2.2" data-path="a-associação-brasileira-de-jurimetria.html"><a href="a-associação-brasileira-de-jurimetria.html"><i class="fa fa-check"></i><b>2.2</b> A Associação Brasileira de Jurimetria</a></li>
+<li class="chapter" data-level="2.3" data-path="jurimetria-na-prática.html"><a href="jurimetria-na-prática.html"><i class="fa fa-check"></i><b>2.3</b> Jurimetria na prática</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="jurimetria-na-prática.html"><a href="jurimetria-na-prática.html#tribunais-101"><i class="fa fa-check"></i><b>2.3.1</b> Tribunais 101</a></li>
+<li class="chapter" data-level="2.3.2" data-path="jurimetria-na-prática.html"><a href="jurimetria-na-prática.html#divisão-regional"><i class="fa fa-check"></i><b>2.3.2</b> Divisão regional</a></li>
+<li class="chapter" data-level="2.3.3" data-path="jurimetria-na-prática.html"><a href="jurimetria-na-prática.html#tipos-de-estudo"><i class="fa fa-check"></i><b>2.3.3</b> Tipos de estudo</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="estudo-câmaras-criminais.html"><a href="estudo-câmaras-criminais.html"><i class="fa fa-check"></i><b>2.4</b> Estudo: Câmaras criminais</a></li>
+<li class="chapter" data-level="2.5" data-path="cuidado.html"><a href="cuidado.html"><i class="fa fa-check"></i><b>2.5</b> Cuidado</a></li>
+<li class="chapter" data-level="2.6" data-path="wrap-up.html"><a href="wrap-up.html"><i class="fa fa-check"></i><b>2.6</b> Wrap-up</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="ferramentas-tidy.html"><a href="ferramentas-tidy.html"><i class="fa fa-check"></i><b>3</b> Ferramentas tidy</a><ul>
+<li class="chapter" data-level="3.1" data-path="select.html"><a href="select.html"><i class="fa fa-check"></i><b>3.1</b> select</a></li>
+<li class="chapter" data-level="3.2" data-path="arrange.html"><a href="arrange.html"><i class="fa fa-check"></i><b>3.2</b> arrange</a></li>
+<li class="chapter" data-level="3.3" data-path="pipe.html"><a href="pipe.html"><i class="fa fa-check"></i><b>3.3</b> Pipe (%&gt;%)</a></li>
+<li class="chapter" data-level="3.4" data-path="filter.html"><a href="filter.html"><i class="fa fa-check"></i><b>3.4</b> filter</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="filter.html"><a href="filter.html#str_detect"><i class="fa fa-check"></i><b>3.4.1</b> str_detect</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="mutate.html"><a href="mutate.html"><i class="fa fa-check"></i><b>3.5</b> mutate</a></li>
+<li class="chapter" data-level="3.6" data-path="group-by-e-summarise.html"><a href="group-by-e-summarise.html"><i class="fa fa-check"></i><b>3.6</b> group_by e summarise</a></li>
+<li class="chapter" data-level="3.7" data-path="left-join.html"><a href="left-join.html"><i class="fa fa-check"></i><b>3.7</b> left_join</a><ul>
+<li class="chapter" data-level="3.7.1" data-path="left-join.html"><a href="left-join.html#aplicação-prática"><i class="fa fa-check"></i><b>3.7.1</b> Aplicação prática</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="importação-de-dados.html"><a href="importação-de-dados.html"><i class="fa fa-check"></i><b>4</b> Importação de dados</a><ul>
+<li class="chapter" data-level="4.1" data-path="usando-o-inspect.html"><a href="usando-o-inspect.html"><i class="fa fa-check"></i><b>4.1</b> Usando o Inspect</a></li>
+<li class="chapter" data-level="4.2" data-path="pacotes-httr-xml2-e-rvest.html"><a href="pacotes-httr-xml2-e-rvest.html"><i class="fa fa-check"></i><b>4.2</b> Pacotes <code>httr</code>, <code>xml2</code> e <code>rvest</code></a><ul>
+<li class="chapter" data-level="4.2.1" data-path="pacotes-httr-xml2-e-rvest.html"><a href="pacotes-httr-xml2-e-rvest.html#get-e-post"><i class="fa fa-check"></i><b>4.2.1</b> <code>GET</code> e <code>POST</code></a></li>
+<li class="chapter" data-level="4.2.2" data-path="pacotes-httr-xml2-e-rvest.html"><a href="pacotes-httr-xml2-e-rvest.html#exercícios"><i class="fa fa-check"></i><b>4.2.2</b> Exercícios</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="listando-processos.html"><a href="listando-processos.html"><i class="fa fa-check"></i><b>4.3</b> Listando processos</a></li>
+<li class="chapter" data-level="4.4" data-path="usando-o-esaj-para-listar-processos.html"><a href="usando-o-esaj-para-listar-processos.html"><i class="fa fa-check"></i><b>4.4</b> Usando o <code>esaj</code> para listar processos</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="usando-o-esaj-para-listar-processos.html"><a href="usando-o-esaj-para-listar-processos.html#pesquisa-por-palavras-chave"><i class="fa fa-check"></i><b>4.4.1</b> Pesquisa por palavras-chave</a></li>
+<li class="chapter" data-level="4.4.2" data-path="usando-o-esaj-para-listar-processos.html"><a href="usando-o-esaj-para-listar-processos.html#pesquisa-por-datas"><i class="fa fa-check"></i><b>4.4.2</b> Pesquisa por datas</a></li>
+<li class="chapter" data-level="4.4.3" data-path="usando-o-esaj-para-listar-processos.html"><a href="usando-o-esaj-para-listar-processos.html#tabelas-de-classes-assuntos-e-câmaras"><i class="fa fa-check"></i><b>4.4.3</b> Tabelas de classes, assuntos e câmaras</a></li>
+<li class="chapter" data-level="4.4.4" data-path="usando-o-esaj-para-listar-processos.html"><a href="usando-o-esaj-para-listar-processos.html#a-função-download_cjsg"><i class="fa fa-check"></i><b>4.4.4</b> A função <code>download_cjsg</code></a></li>
+<li class="chapter" data-level="4.4.5" data-path="usando-o-esaj-para-listar-processos.html"><a href="usando-o-esaj-para-listar-processos.html#exercícios-1"><i class="fa fa-check"></i><b>4.4.5</b> Exercícios</a></li>
+<li class="chapter" data-level="4.4.6" data-path="usando-o-esaj-para-listar-processos.html"><a href="usando-o-esaj-para-listar-processos.html#arrumando-os-dados"><i class="fa fa-check"></i><b>4.4.6</b> Arrumando os dados</a></li>
+<li class="chapter" data-level="4.4.7" data-path="usando-o-esaj-para-listar-processos.html"><a href="usando-o-esaj-para-listar-processos.html#exercícios-2"><i class="fa fa-check"></i><b>4.4.7</b> Exercícios</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="baixando-processos-individuais.html"><a href="baixando-processos-individuais.html"><i class="fa fa-check"></i><b>4.5</b> Baixando processos individuais</a><ul>
+<li class="chapter" data-level="4.5.1" data-path="baixando-processos-individuais.html"><a href="baixando-processos-individuais.html#download-cposg"><i class="fa fa-check"></i><b>4.5.1</b> Download CPOSG</a></li>
+<li class="chapter" data-level="4.5.2" data-path="baixando-processos-individuais.html"><a href="baixando-processos-individuais.html#baixando-decisões"><i class="fa fa-check"></i><b>4.5.2</b> Baixando decisões</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="processando-documentos.html"><a href="processando-documentos.html"><i class="fa fa-check"></i><b>4.6</b> Processando documentos</a><ul>
+<li class="chapter" data-level="4.6.1" data-path="processando-documentos.html"><a href="processando-documentos.html#parse-cposg"><i class="fa fa-check"></i><b>4.6.1</b> Parse CPOSG</a></li>
+<li class="chapter" data-level="4.6.2" data-path="processando-documentos.html"><a href="processando-documentos.html#exercícios-3"><i class="fa fa-check"></i><b>4.6.2</b> Exercícios</a></li>
+</ul></li>
+<li class="chapter" data-level="4.7" data-path="pacote-abjutils.html"><a href="pacote-abjutils.html"><i class="fa fa-check"></i><b>4.7</b> Pacote <code>abjutils</code></a><ul>
+<li class="chapter" data-level="4.7.1" data-path="pacote-abjutils.html"><a href="pacote-abjutils.html#trabalhando-com-números-de-processos"><i class="fa fa-check"></i><b>4.7.1</b> Trabalhando com números de processos</a></li>
+<li class="chapter" data-level="4.7.2" data-path="pacote-abjutils.html"><a href="pacote-abjutils.html#trabalhando-com-acentos"><i class="fa fa-check"></i><b>4.7.2</b> Trabalhando com acentos</a></li>
+<li class="chapter" data-level="4.7.3" data-path="pacote-abjutils.html"><a href="pacote-abjutils.html#exercício"><i class="fa fa-check"></i><b>4.7.3</b> Exercício</a></li>
+</ul></li>
+<li class="chapter" data-level="4.8" data-path="wrap-up-1.html"><a href="wrap-up-1.html"><i class="fa fa-check"></i><b>4.8</b> Wrap-up</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="transformação-e-visualização-de-dados.html"><a href="transformação-e-visualização-de-dados.html"><i class="fa fa-check"></i><b>5</b> Transformação e visualização de dados</a><ul>
+<li class="chapter" data-level="5.1" data-path="análise-das-câmaras.html"><a href="análise-das-câmaras.html"><i class="fa fa-check"></i><b>5.1</b> Análise das câmaras</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="análise-das-câmaras.html"><a href="análise-das-câmaras.html#como-se-distribuem-os-assuntos-em-cada-câmara"><i class="fa fa-check"></i><b>5.1.1</b> Como se distribuem os assuntos em cada câmara?</a></li>
+<li class="chapter" data-level="5.1.2" data-path="análise-das-câmaras.html"><a href="análise-das-câmaras.html#qual-a-proporção-de-decisões-por-câmara"><i class="fa fa-check"></i><b>5.1.2</b> Qual a proporção de decisões por câmara?</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="wrap-up-2.html"><a href="wrap-up-2.html"><i class="fa fa-check"></i><b>5.2</b> Wrap-up</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Jurimetria com aplicações em R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="group_by-e-summarise" class="section level2">
+<h2><span class="header-section-number">3.6</span> group_by e summarise</h2>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1">cjsg <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb30-2" data-line-number="2"><span class="st">  </span><span class="kw">select</span>(id_processo, dt_decisao) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb30-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">dia_da_semana =</span> <span class="kw">weekdays</span>(<span class="kw">dmy</span>(dt_decisao))) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb30-4" data-line-number="4"><span class="st">  </span><span class="kw">group_by</span>(dia_da_semana) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb30-5" data-line-number="5"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">n =</span> <span class="kw">n</span>())</a></code></pre></div>
+<pre><code>#&gt; # A tibble: 5 x 2
+#&gt;   dia_da_semana     n
+#&gt;   &lt;chr&gt;         &lt;int&gt;
+#&gt; 1 quarta         1530
+#&gt; 2 quinta         6044
+#&gt; 3 segunda        1537
+#&gt; 4 terça          2555
+#&gt; 5 &lt;NA&gt;             65</code></pre>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="mutate.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="left-join.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "none"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

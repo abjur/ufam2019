@@ -231,23 +231,23 @@ configurações identificam os foros de São Paulo. Na maioria dos casos, o núm
 também identifica a comarca, pois existem poucas comarcas com mais de um foro (
 e.g. a comarca de São Paulo, que possui mais de dez foros regionais).</li>
 </ul>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" data-line-number="1">id_montado &lt;-<span class="st"> &quot;0000009-15.2015.8.26.0558&quot;</span></a>
-<a class="sourceLine" id="cb55-2" data-line-number="2">id_limpo_dig &lt;-<span class="st"> &quot;00000091520158260558&quot;</span></a>
-<a class="sourceLine" id="cb55-3" data-line-number="3">id_limpo_ndig &lt;-<span class="st"> &quot;000000920158260558&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" data-line-number="1">id_montado &lt;-<span class="st"> &quot;0000009-15.2015.8.26.0558&quot;</span></a>
+<a class="sourceLine" id="cb56-2" data-line-number="2">id_limpo_dig &lt;-<span class="st"> &quot;00000091520158260558&quot;</span></a>
+<a class="sourceLine" id="cb56-3" data-line-number="3">id_limpo_ndig &lt;-<span class="st"> &quot;000000920158260558&quot;</span></a></code></pre></div>
 <p>As funções <code>abjutils::build_id()</code> e <code>abjutils::clean_cnj()</code> montam ou limpam o número do processo.</p>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" data-line-number="1">abjutils<span class="op">::</span><span class="kw">build_id</span>(id_limpo_dig)</a></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" data-line-number="1">abjutils<span class="op">::</span><span class="kw">build_id</span>(id_limpo_dig)</a></code></pre></div>
 <pre><code>#&gt; [1] &quot;0000009-15.2015.8.26.0558&quot;</code></pre>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" data-line-number="1">abjutils<span class="op">::</span><span class="kw">clean_cnj</span>(id_montado)</a></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" data-line-number="1">abjutils<span class="op">::</span><span class="kw">clean_cnj</span>(id_montado)</a></code></pre></div>
 <pre><code>#&gt; [1] &quot;00000091520158260558&quot;</code></pre>
 <p>A função <code>abjutils::extract_parts()</code> extrai todos os componentes do número do processo.</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" data-line-number="1">abjutils<span class="op">::</span><span class="kw">extract_parts</span>(id_montado)</a></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" data-line-number="1">abjutils<span class="op">::</span><span class="kw">extract_parts</span>(id_montado)</a></code></pre></div>
 <pre><code>#&gt; [[1]]
 #&gt;         N         D         A         J         T         O 
 #&gt; &quot;0000009&quot;      &quot;15&quot;    &quot;2015&quot;       &quot;8&quot;      &quot;26&quot;    &quot;0558&quot;</code></pre>
 <p>A função <code>abjutils::separate_cnj()</code> faz o mesmo, mas em uma coluna do banco de dados</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" data-line-number="1">d_cjsg <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb62-2" data-line-number="2"><span class="st">  </span>abjutils<span class="op">::</span><span class="kw">separate_cnj</span>(<span class="st">&quot;id_lawsuit&quot;</span>, <span class="dt">remove =</span> <span class="ot">FALSE</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb62-3" data-line-number="3"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">glimpse</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" data-line-number="1">d_cjsg <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb63-2" data-line-number="2"><span class="st">  </span>abjutils<span class="op">::</span><span class="kw">separate_cnj</span>(<span class="st">&quot;id_lawsuit&quot;</span>, <span class="dt">remove =</span> <span class="ot">FALSE</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb63-3" data-line-number="3"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">glimpse</span>()</a></code></pre></div>
 <pre><code>#&gt; Observations: 40
 #&gt; Variables: 19
 #&gt; $ file              &lt;chr&gt; &quot;data-raw/cjsg/page1.html&quot;, &quot;data-raw/cjsg/pag…
@@ -270,16 +270,16 @@ e.g. a comarca de São Paulo, que possui mais de dez foros regionais).</li>
 #&gt; $ summary           &lt;chr&gt; &quot;Agravo em execução. Progressão de regime. Exa…
 #&gt; $ txt_summary       &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</code></pre>
 <p>A função <code>abjutils::calc_dig()</code> calcula o dígito verificador do processo a partir do número incompleto. A função <code>abjutils::check_dig()</code> checa se o dígito do processo está correto. Essas funções são úteis para i) gerar números de processo aleatórios e ii) arrumar erros de parse, por exemplo, o resultado da leitura de um DJE ou de um PDF escaneado.</p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" data-line-number="1">abjutils<span class="op">::</span><span class="kw">calc_dig</span>(id_limpo_ndig)</a></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" data-line-number="1">abjutils<span class="op">::</span><span class="kw">calc_dig</span>(id_limpo_ndig)</a></code></pre></div>
 <pre><code>#&gt; [1] &quot;15&quot;</code></pre>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" data-line-number="1">abjutils<span class="op">::</span><span class="kw">check_dig</span>(id_montado)</a></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" data-line-number="1">abjutils<span class="op">::</span><span class="kw">check_dig</span>(id_montado)</a></code></pre></div>
 <pre><code>#&gt; [1] TRUE</code></pre>
 <p>Finalmente, a função <code>abjutils::sample_cnj()</code> serve para criar amostras de números de processos. Esses pocessos podem ser manifestos ou não. Em algumas pesquisas mais complicadas (e.g. nossa pesquisa sobre processamento de homicídios) esse tipo de abordagem é necessária.</p>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb68-2" data-line-number="2">abjutils<span class="op">::</span><span class="kw">sample_cnj</span>(<span class="dt">n =</span> <span class="dv">10</span>, <span class="dt">foros =</span> <span class="st">&quot;0001&quot;</span>, <span class="dt">anos =</span> <span class="dv">2015</span><span class="op">:</span><span class="dv">2017</span>, </a>
-<a class="sourceLine" id="cb68-3" data-line-number="3">                     <span class="dt">orgao =</span> <span class="st">&quot;8&quot;</span>, <span class="dt">tr =</span> <span class="st">&quot;26&quot;</span>, </a>
-<a class="sourceLine" id="cb68-4" data-line-number="4">                     <span class="dt">first_dig =</span> <span class="dv">0</span>, <span class="dt">return_df =</span> <span class="ot">FALSE</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb68-5" data-line-number="5"><span class="st">  </span>abjutils<span class="op">::</span><span class="kw">build_id</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb69-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb69-2" data-line-number="2">abjutils<span class="op">::</span><span class="kw">sample_cnj</span>(<span class="dt">n =</span> <span class="dv">10</span>, <span class="dt">foros =</span> <span class="st">&quot;0001&quot;</span>, <span class="dt">anos =</span> <span class="dv">2015</span><span class="op">:</span><span class="dv">2017</span>, </a>
+<a class="sourceLine" id="cb69-3" data-line-number="3">                     <span class="dt">orgao =</span> <span class="st">&quot;8&quot;</span>, <span class="dt">tr =</span> <span class="st">&quot;26&quot;</span>, </a>
+<a class="sourceLine" id="cb69-4" data-line-number="4">                     <span class="dt">first_dig =</span> <span class="dv">0</span>, <span class="dt">return_df =</span> <span class="ot">FALSE</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb69-5" data-line-number="5"><span class="st">  </span>abjutils<span class="op">::</span><span class="kw">build_id</span>()</a></code></pre></div>
 <pre><code>#&gt;  [1] &quot;0176556-29.2015.8.26.0001&quot; &quot;0687022-54.2017.8.26.0001&quot;
 #&gt;  [3] &quot;0384103-39.2015.8.26.0001&quot; &quot;0769841-82.2016.8.26.0001&quot;
 #&gt;  [5] &quot;0497699-98.2015.8.26.0001&quot; &quot;0717618-21.2017.8.26.0001&quot;
@@ -289,7 +289,7 @@ e.g. a comarca de São Paulo, que possui mais de dez foros regionais).</li>
 <div id="trabalhando-com-acentos" class="section level3">
 <h3><span class="header-section-number">4.7.2</span> Trabalhando com acentos</h3>
 <p>A função <code>abjutils::rm_accent()</code> serve para tirar acentos de um texto</p>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" data-line-number="1">abjutils<span class="op">::</span><span class="kw">rm_accent</span>(<span class="st">&quot;Têxto cóm açèntõs&quot;)</span></a></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb71-1" data-line-number="1">abjutils<span class="op">::</span><span class="kw">rm_accent</span>(<span class="st">&quot;Têxto cóm açèntõs&quot;)</span></a></code></pre></div>
 <pre><code>#&gt; [1] &quot;Texto com acentos&quot;</code></pre>
 <p>Só isso! Mas extremamente útil.</p>
 <p>Outra versão dessa função pode ser encontrada no pacote <code>rslp</code>.</p>

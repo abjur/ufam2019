@@ -230,24 +230,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>O <code>httr</code> possui os métodos <code>GET</code> e <code>POST</code> implementados e são muito similares. A lista de parâmetros enviados pelo usuário pode ser armazenado numa <code>list</code> nomeada, e adicionado ao <code>GET</code> pelo parâmetro <code>query</code> ou no <code>POST</code> pelo parâmetro <code>body</code>.</p></li>
 </ul>
 <p>Exemplo de <code>GET</code></p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1">httr<span class="op">::</span><span class="kw">GET</span>(<span class="st">&quot;http://google.com/search&quot;</span>, </a>
-<a class="sourceLine" id="cb35-2" data-line-number="2">          <span class="dt">query =</span> <span class="kw">list</span>(<span class="dt">q =</span> <span class="st">&quot;jurimetria&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1">httr<span class="op">::</span><span class="kw">GET</span>(<span class="st">&quot;http://google.com/search&quot;</span>, </a>
+<a class="sourceLine" id="cb36-2" data-line-number="2">          <span class="dt">query =</span> <span class="kw">list</span>(<span class="dt">q =</span> <span class="st">&quot;jurimetria&quot;</span>))</a></code></pre></div>
 <pre><code>#&gt; Response [http://www.google.com/search?q=jurimetria]
-#&gt;   Date: 2019-10-21 10:41
+#&gt;   Date: 2019-10-21 11:15
 #&gt;   Status: 200
 #&gt;   Content-Type: text/html; charset=ISO-8859-1
-#&gt;   Size: 45.7 kB
+#&gt;   Size: 45.6 kB
 #&gt; &lt;!doctype html&gt;&lt;html lang=&quot;pt-BR&quot;&gt;&lt;head&gt;&lt;meta charset=&quot;UTF-8&quot;&gt;&lt;meta cont...
 #&gt; &lt;span class=&quot;BNeawe&quot;&gt;&lt;a href=&quot;/url?q=https://pt.wikipedia.org/wiki/Jurim...
 #&gt; function C(){w=null;if(x){var a=&quot;/complete/search?client=heirloom-srp&amp;hl...
 #&gt; function D(){for(;n.firstChild;)n.removeChild(n.firstChild);r=[];t=-1;z(...
 #&gt; (function(){for(var a=+new Date-window.start,b=D(a),d=0,c=0,f=0,n=docume...</code></pre>
 <p>Exemplo de <code>POST</code></p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1">httr<span class="op">::</span><span class="kw">POST</span>(<span class="st">&quot;http://httpbin.org/post&quot;</span>, </a>
-<a class="sourceLine" id="cb37-2" data-line-number="2">           <span class="dt">body =</span> <span class="kw">list</span>(<span class="dt">x =</span> <span class="st">&quot;Mãe to na request&quot;</span>), </a>
-<a class="sourceLine" id="cb37-3" data-line-number="3">           <span class="dt">encode =</span> <span class="st">&quot;json&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1">httr<span class="op">::</span><span class="kw">POST</span>(<span class="st">&quot;http://httpbin.org/post&quot;</span>, </a>
+<a class="sourceLine" id="cb38-2" data-line-number="2">           <span class="dt">body =</span> <span class="kw">list</span>(<span class="dt">x =</span> <span class="st">&quot;Mãe to na request&quot;</span>), </a>
+<a class="sourceLine" id="cb38-3" data-line-number="3">           <span class="dt">encode =</span> <span class="st">&quot;json&quot;</span>)</a></code></pre></div>
 <pre><code>#&gt; Response [http://httpbin.org/post]
-#&gt;   Date: 2019-10-21 10:41
+#&gt;   Date: 2019-10-21 11:15
 #&gt;   Status: 200
 #&gt;   Content-Type: application/json
 #&gt;   Size: 518 B

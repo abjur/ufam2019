@@ -225,26 +225,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="parse-cposg" class="section level3">
 <h3><span class="header-section-number">4.6.1</span> Parse CPOSG</h3>
 <p>O parser da consulta de processos foi escrito de um jeito especial. Uma página de resultados tem vários blocos de informações, entre eles i) dados básicos, ii) partes, iii) movimentações e iv) decisões. Em algumas pesquisas, temos interesse em apenas uma parte desses blocos. O parser foi construído para modular essa captura de informações.</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" data-line-number="1"><span class="co"># lista de arquivos</span></a>
-<a class="sourceLine" id="cb52-2" data-line-number="2">files_cposg &lt;-<span class="st"> </span>fs<span class="op">::</span><span class="kw">dir_ls</span>(<span class="st">&quot;data-raw/cposg&quot;</span>)</a>
-<a class="sourceLine" id="cb52-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb52-4" data-line-number="4"><span class="co"># objeto de parse</span></a>
-<a class="sourceLine" id="cb52-5" data-line-number="5">parser &lt;-<span class="st"> </span>esaj<span class="op">::</span><span class="kw">make_parser</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb52-6" data-line-number="6"><span class="st">  </span>esaj<span class="op">::</span><span class="kw">parse_data</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb52-7" data-line-number="7"><span class="st">  </span>esaj<span class="op">::</span><span class="kw">parse_parts</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb52-8" data-line-number="8"><span class="st">  </span>esaj<span class="op">::</span><span class="kw">parse_movs</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb52-9" data-line-number="9"><span class="st">  </span>esaj<span class="op">::</span><span class="kw">parse_decisions</span>()</a>
-<a class="sourceLine" id="cb52-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb52-11" data-line-number="11"><span class="co"># rodar parse</span></a>
-<a class="sourceLine" id="cb52-12" data-line-number="12">d_cposg &lt;-<span class="st"> </span>esaj<span class="op">::</span><span class="kw">run_parser</span>(<span class="dt">file =</span> files_cposg, </a>
-<a class="sourceLine" id="cb52-13" data-line-number="13">                            <span class="dt">parser =</span> parser, </a>
-<a class="sourceLine" id="cb52-14" data-line-number="14">                            <span class="dt">path =</span> <span class="st">&quot;data-raw/cposg_rds&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" data-line-number="1"><span class="co"># lista de arquivos</span></a>
+<a class="sourceLine" id="cb53-2" data-line-number="2">files_cposg &lt;-<span class="st"> </span>fs<span class="op">::</span><span class="kw">dir_ls</span>(<span class="st">&quot;data-raw/cposg&quot;</span>)</a>
+<a class="sourceLine" id="cb53-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb53-4" data-line-number="4"><span class="co"># objeto de parse</span></a>
+<a class="sourceLine" id="cb53-5" data-line-number="5">parser &lt;-<span class="st"> </span>esaj<span class="op">::</span><span class="kw">make_parser</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb53-6" data-line-number="6"><span class="st">  </span>esaj<span class="op">::</span><span class="kw">parse_data</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb53-7" data-line-number="7"><span class="st">  </span>esaj<span class="op">::</span><span class="kw">parse_parts</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb53-8" data-line-number="8"><span class="st">  </span>esaj<span class="op">::</span><span class="kw">parse_movs</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb53-9" data-line-number="9"><span class="st">  </span>esaj<span class="op">::</span><span class="kw">parse_decisions</span>()</a>
+<a class="sourceLine" id="cb53-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb53-11" data-line-number="11"><span class="co"># rodar parse</span></a>
+<a class="sourceLine" id="cb53-12" data-line-number="12">d_cposg &lt;-<span class="st"> </span>esaj<span class="op">::</span><span class="kw">run_parser</span>(<span class="dt">file =</span> files_cposg, </a>
+<a class="sourceLine" id="cb53-13" data-line-number="13">                            <span class="dt">parser =</span> parser, </a>
+<a class="sourceLine" id="cb53-14" data-line-number="14">                            <span class="dt">path =</span> <span class="st">&quot;data-raw/cposg_rds&quot;</span>)</a></code></pre></div>
 <p>Outra diferença importante é que, nesse caso, salvamos individualmente os resultados do parse em arquivos <code>.rds</code>. Isso é feito para evitar retrabalho, já que esse processo é computacionalmente intensivo e algo de errado pode acontecer no meio da execução.</p>
 <p>Para obter a base de dados, basta ler e empilhar os arquivos parciais que foram gerados.</p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" data-line-number="1">rds_files &lt;-<span class="st"> </span>fs<span class="op">::</span><span class="kw">dir_ls</span>(<span class="st">&quot;data-raw/cposg_rds&quot;</span>)</a>
-<a class="sourceLine" id="cb53-2" data-line-number="2">d_cposg &lt;-<span class="st"> </span>purrr<span class="op">::</span><span class="kw">map_dfr</span>(rds_files, readr<span class="op">::</span>read_rds)</a>
-<a class="sourceLine" id="cb53-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb53-4" data-line-number="4">dplyr<span class="op">::</span><span class="kw">glimpse</span>(d_cposg)</a></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" data-line-number="1">rds_files &lt;-<span class="st"> </span>fs<span class="op">::</span><span class="kw">dir_ls</span>(<span class="st">&quot;data-raw/cposg_rds&quot;</span>)</a>
+<a class="sourceLine" id="cb54-2" data-line-number="2">d_cposg &lt;-<span class="st"> </span>purrr<span class="op">::</span><span class="kw">map_dfr</span>(rds_files, readr<span class="op">::</span>read_rds)</a>
+<a class="sourceLine" id="cb54-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb54-4" data-line-number="4">dplyr<span class="op">::</span><span class="kw">glimpse</span>(d_cposg)</a></code></pre></div>
 <pre><code>#&gt; Observations: 89
 #&gt; Variables: 7
 #&gt; $ id        &lt;chr&gt; &quot;00000091520158260558&quot;, &quot;00002046520118260420&quot;, &quot;00003…

@@ -215,25 +215,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="left_join" class="section level2">
 <h2><span class="header-section-number">3.7</span> left_join</h2>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1">cposg &lt;-<span class="st"> </span><span class="kw">read_rds</span>(<span class="st">&quot;data-raw/camaras/d_cposg.rds&quot;</span>)</a>
-<a class="sourceLine" id="cb32-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb32-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb32-4" data-line-number="4">d_total &lt;-<span class="st"> </span>cjsg <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb32-5" data-line-number="5"><span class="st">  </span><span class="kw">left_join</span>(cposg, <span class="kw">c</span>(<span class="st">&quot;id_processo&quot;</span> =<span class="st"> &quot;id_lawsuit&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1">cposg &lt;-<span class="st"> </span><span class="kw">read_rds</span>(<span class="st">&quot;data-raw/camaras/d_cposg.rds&quot;</span>)</a>
+<a class="sourceLine" id="cb33-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb33-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb33-4" data-line-number="4">d_total &lt;-<span class="st"> </span>cjsg <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb33-5" data-line-number="5"><span class="st">  </span><span class="kw">left_join</span>(cposg, <span class="kw">c</span>(<span class="st">&quot;id_processo&quot;</span> =<span class="st"> &quot;id_lawsuit&quot;</span>))</a></code></pre></div>
 <div id="aplicação-prática" class="section level3">
 <h3><span class="header-section-number">3.7.1</span> Aplicação prática</h3>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1"><span class="co"># lidando com repeticoes</span></a>
-<a class="sourceLine" id="cb33-2" data-line-number="2">cjsg_distintos &lt;-<span class="st"> </span>cjsg <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb33-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">dt_decisao =</span> <span class="kw">dmy</span>(dt_decisao)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb33-4" data-line-number="4"><span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(dt_decisao)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb33-5" data-line-number="5"><span class="st">  </span><span class="kw">distinct</span>(id_processo, <span class="dt">.keep_all =</span> <span class="ot">TRUE</span>) </a>
-<a class="sourceLine" id="cb33-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb33-7" data-line-number="7">cposg_distintos &lt;-<span class="st"> </span>cposg <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb33-8" data-line-number="8"><span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">str_detect</span>(file, <span class="st">&quot;recurso|reex&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb33-9" data-line-number="9"><span class="st">  </span><span class="kw">distinct</span>(id_lawsuit, <span class="dt">.keep_all =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb33-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb33-11" data-line-number="11">cjsg_distintos <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb33-12" data-line-number="12"><span class="st">  </span><span class="kw">left_join</span>(cposg_distintos, <span class="kw">c</span>(<span class="st">&quot;id_processo&quot;</span> =<span class="st"> &quot;id_lawsuit&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1"><span class="co"># lidando com repeticoes</span></a>
+<a class="sourceLine" id="cb34-2" data-line-number="2">cjsg_distintos &lt;-<span class="st"> </span>cjsg <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb34-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">dt_decisao =</span> <span class="kw">dmy</span>(dt_decisao)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb34-4" data-line-number="4"><span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(dt_decisao)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb34-5" data-line-number="5"><span class="st">  </span><span class="kw">distinct</span>(id_processo, <span class="dt">.keep_all =</span> <span class="ot">TRUE</span>) </a>
+<a class="sourceLine" id="cb34-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb34-7" data-line-number="7">cposg_distintos &lt;-<span class="st"> </span>cposg <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb34-8" data-line-number="8"><span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">str_detect</span>(file, <span class="st">&quot;recurso|reex&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb34-9" data-line-number="9"><span class="st">  </span><span class="kw">distinct</span>(id_lawsuit, <span class="dt">.keep_all =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb34-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb34-11" data-line-number="11">cjsg_distintos <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb34-12" data-line-number="12"><span class="st">  </span><span class="kw">left_join</span>(cposg_distintos, <span class="kw">c</span>(<span class="st">&quot;id_processo&quot;</span> =<span class="st"> &quot;id_lawsuit&quot;</span>))</a></code></pre></div>
 <pre><code>#&gt; # A tibble: 11,642 x 20
 #&gt;    arq   pagina id_decisao id_processo classe_assunto comarca vara 
 #&gt;    &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;      &lt;chr&gt;       &lt;chr&gt;          &lt;chr&gt;   &lt;chr&gt;

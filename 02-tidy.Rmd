@@ -48,7 +48,7 @@ arrange(df, x)
 
 ## Pipe (%>%)
 
-```{r, eval=FALSE}
+```{r, eval=FALSE, echo=TRUE}
 esfrie(
   asse(
     coloque(

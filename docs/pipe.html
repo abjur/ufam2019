@@ -215,6 +215,40 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="pipe" class="section level2">
 <h2><span class="header-section-number">3.3</span> Pipe (%&gt;%)</h2>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="kw">esfrie</span>(</a>
+<a class="sourceLine" id="cb19-2" data-line-number="2">  <span class="kw">asse</span>(</a>
+<a class="sourceLine" id="cb19-3" data-line-number="3">    <span class="kw">coloque</span>(</a>
+<a class="sourceLine" id="cb19-4" data-line-number="4">      <span class="kw">bata</span>(</a>
+<a class="sourceLine" id="cb19-5" data-line-number="5">        <span class="kw">acrescente</span>(</a>
+<a class="sourceLine" id="cb19-6" data-line-number="6">          <span class="kw">recipiente</span>(</a>
+<a class="sourceLine" id="cb19-7" data-line-number="7">            <span class="kw">rep</span>(</a>
+<a class="sourceLine" id="cb19-8" data-line-number="8">              <span class="st">&quot;farinha&quot;</span>, </a>
+<a class="sourceLine" id="cb19-9" data-line-number="9">              <span class="dv">2</span></a>
+<a class="sourceLine" id="cb19-10" data-line-number="10">            ), </a>
+<a class="sourceLine" id="cb19-11" data-line-number="11">            <span class="st">&quot;água&quot;</span>, <span class="st">&quot;fermento&quot;</span>, <span class="st">&quot;leite&quot;</span>, <span class="st">&quot;óleo&quot;</span></a>
+<a class="sourceLine" id="cb19-12" data-line-number="12">          ), </a>
+<a class="sourceLine" id="cb19-13" data-line-number="13">          <span class="st">&quot;farinha&quot;</span>, até =<span class="st"> &quot;macio&quot;</span></a>
+<a class="sourceLine" id="cb19-14" data-line-number="14">        ), </a>
+<a class="sourceLine" id="cb19-15" data-line-number="15">        duraçã<span class="dt">o =</span> <span class="st">&quot;3min&quot;</span></a>
+<a class="sourceLine" id="cb19-16" data-line-number="16">      ), </a>
+<a class="sourceLine" id="cb19-17" data-line-number="17">      <span class="dt">lugar =</span> <span class="st">&quot;forma&quot;</span>, <span class="dt">tipo =</span> <span class="st">&quot;grande&quot;</span>, <span class="dt">untada =</span> <span class="ot">TRUE</span></a>
+<a class="sourceLine" id="cb19-18" data-line-number="18">    ), </a>
+<a class="sourceLine" id="cb19-19" data-line-number="19">    duraçã<span class="dt">o =</span> <span class="st">&quot;50min&quot;</span></a>
+<a class="sourceLine" id="cb19-20" data-line-number="20">  ), </a>
+<a class="sourceLine" id="cb19-21" data-line-number="21">  <span class="st">&quot;geladeira&quot;</span>, <span class="st">&quot;20min&quot;</span></a>
+<a class="sourceLine" id="cb19-22" data-line-number="22">)</a>
+<a class="sourceLine" id="cb19-23" data-line-number="23"></a>
+<a class="sourceLine" id="cb19-24" data-line-number="24"><span class="co"># Veja como o código acima pode ser reescrito utilizando-se o pipe. </span></a>
+<a class="sourceLine" id="cb19-25" data-line-number="25"><span class="co"># Agora realmente se parece com uma receita de bolo.</span></a>
+<a class="sourceLine" id="cb19-26" data-line-number="26"></a>
+<a class="sourceLine" id="cb19-27" data-line-number="27"><span class="kw">recipiente</span>(<span class="kw">rep</span>(<span class="st">&quot;farinha&quot;</span>, <span class="dv">2</span>), <span class="st">&quot;água&quot;</span>, <span class="st">&quot;fermento&quot;</span>, <span class="st">&quot;leite&quot;</span>, <span class="st">&quot;óleo&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb19-28" data-line-number="28"><span class="st">  </span><span class="kw">acrescente</span>(<span class="st">&quot;farinha&quot;</span>, até =<span class="st"> &quot;macio&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb19-29" data-line-number="29"><span class="st">  </span><span class="kw">bata</span>(duraçã<span class="dt">o =</span> <span class="st">&quot;3min&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb19-30" data-line-number="30"><span class="st">  </span><span class="kw">coloque</span>(<span class="dt">lugar =</span> <span class="st">&quot;forma&quot;</span>, <span class="dt">tipo =</span> <span class="st">&quot;grande&quot;</span>, <span class="dt">untada =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb19-31" data-line-number="31"><span class="st">  </span><span class="kw">asse</span>(duraçã<span class="dt">o =</span> <span class="st">&quot;50min&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb19-32" data-line-number="32"><span class="st">  </span><span class="kw">esfrie</span>(<span class="st">&quot;geladeira&quot;</span>, <span class="st">&quot;20min&quot;</span>)</a>
+<a class="sourceLine" id="cb19-33" data-line-number="33"></a>
+<a class="sourceLine" id="cb19-34" data-line-number="34"><span class="co"># ATALHO: CTRL + SHIFT + M</span></a></code></pre></div>
 </div>
             </section>
 
